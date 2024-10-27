@@ -14,10 +14,9 @@ class PostTableSeeder extends Seeder
      */
     public function run(): void
     {
-
         $tags = Tag::factory()->count(5)->create();
 
-        Post::factory()->count(10)->create()
+        Post::factory()->count(100)->create()
         ->each(function ($post) use ($tags) {
             $tagsToAdd = $tags->random(rand(1,3))->pluck('id')->unique();
             $post->tags()->attach($tagsToAdd);
