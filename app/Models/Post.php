@@ -9,8 +9,18 @@ class Post extends Model
 {
     use HasFactory;
 
-    public function maker()
+    public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

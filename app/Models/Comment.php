@@ -9,12 +9,12 @@ class Comment extends Model
 {
     use HasFactory;
 
-    public function userMaker()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function postUnder()
+    public function post()
     {
         return $this->belongsTo(Post::class);
     }
