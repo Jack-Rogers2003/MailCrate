@@ -17,7 +17,8 @@ class TagFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'id' => fake()->unique()->randomNumber(),
+            'type' => fake()->unique()->randomElement(['discussion', 'joke', 'question', 'screenshot', 'video'])
         ];
     }
 }
