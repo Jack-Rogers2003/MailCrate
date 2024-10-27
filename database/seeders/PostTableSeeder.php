@@ -14,11 +14,13 @@ class PostTableSeeder extends Seeder
      */
     public function run(): void
     {
+        //Creates the tags the comments will use
         $tags = Tag::factory()->count(5)->create();
 
         Post::factory()->count(100)->create()
+        //Loop that attaches between 0-3 tags to each comment
         ->each(function ($post) use ($tags) {
-            $tagsToAdd = $tags->random(rand(1,3))->pluck('id')->unique();
+            $tagsToAdd = $tags->random(rand(0,3))->pluck('id')->unique();
             $post->tags()->attach($tagsToAdd);
         });
     }
