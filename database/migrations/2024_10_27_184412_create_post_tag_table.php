@@ -17,11 +17,9 @@ return new class extends Migration
             $table->bigInteger('tag_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('post_id')->references('id')->on('posts')
-            ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('post_id')->references('id')->on('posts');
 
-            $table->foreign('tag_id')->references('id')->on('tags')
-            ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('tag_id')->references('id')->on('tags');
         });
     }
 

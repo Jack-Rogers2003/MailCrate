@@ -19,7 +19,7 @@ class UserFactory extends Factory
         return [
             'id' => fake()->unique()->randomNumber(),
             'name' => fake()->name(),
-            'password' => fake()->word(),
+            'password' => fake()->password(),
         ];
     }
 }

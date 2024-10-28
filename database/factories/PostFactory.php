@@ -19,8 +19,8 @@ class PostFactory extends Factory
     {
         return [
             'id' => fake()->unique()->randomNumber(),
-            'title' => fake()->name(),
-            'content' => fake()->text(),
+            'title' => fake()->sentence(),
+            'content' => fake()->paragraphs(1, true),
             'user_id' => function () {
                 return User::inRandomOrder()->first()->id;
             }
