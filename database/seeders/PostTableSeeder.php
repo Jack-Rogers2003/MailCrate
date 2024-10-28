@@ -17,7 +17,7 @@ class PostTableSeeder extends Seeder
         //Creates the tags the comments will use
         $tags = Tag::factory()->count(5)->create();
 
-        Post::factory()->count(1000)->create()
+        Post::factory()->count(10)->create()
         //Loop that attaches between 0-3 tags to each comment
         ->each(function ($post) use ($tags) {
             $tagsToAdd = $tags->random(rand(0,3))->pluck('id')->unique();
