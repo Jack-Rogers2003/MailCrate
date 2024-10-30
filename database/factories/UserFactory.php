@@ -19,6 +19,8 @@ class UserFactory extends Factory
         return [
             'id' => fake()->unique()->randomNumber(),
             'name' => fake()->name(),
+            'email' => fake()->email(),
+            'phone_number' => fake()->phoneNumber(),
             'password' => fake()->password(),
         ];
     }
