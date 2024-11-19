@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\User;
+use App\Models\Account;
 use App\Models\Post;
 
 /**
@@ -21,8 +21,8 @@ class CommentFactory extends Factory
         return [
             'id' => fake()->unique()->randomNumber(),
             'content' => fake()->text(),
-            'user_id' => function () {
-                return User::inRandomOrder()->first()->id;
+            'account_id' => function () {
+                return Account::inRandomOrder()->first()->id;
             },
             'post_id' => function () {
                 return Post::inRandomOrder()->first()->id;

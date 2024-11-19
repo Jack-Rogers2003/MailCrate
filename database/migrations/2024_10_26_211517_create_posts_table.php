@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->bigInteger('user_id')->unsigned()->dropUnique();
+            $table->bigInteger('account_id')->unsigned()->dropUnique();
 
-            $table->foreign('user_id')->references('id')->on('users')
+            $table->foreign('account_id')->references('id')->on('accounts')
             ->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();

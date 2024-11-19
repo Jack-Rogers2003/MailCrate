@@ -9,9 +9,9 @@ class Post extends Model
 {
     use HasFactory;
 
-    public function user()
+    public function poster()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Account::class);
     }
 
     public function comments()

@@ -9,9 +9,9 @@ class Comment extends Model
 {
     use HasFactory;
 
-    public function user()
+    public function commenter()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Account::class);
     }
 
     public function post()
