@@ -18,4 +18,14 @@ class Comment extends Model
     {
         return $this->belongsTo(Post::class);
     }
+
+    public function commentable()
+    {
+        return $this->morphTo();
+    }
+
+    public function parentComment()
+    {
+        return $this->belongsTo(Comment::class, 'commentable_id');
+    }
 }
