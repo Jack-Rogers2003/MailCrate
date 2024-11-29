@@ -1,19 +1,18 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('livewire/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function() {
+    return view('livewire/dashboard');
+});
+Route::get('/auth', [AuthController::class, 'showAuthForm']);
+Route::post('auth/register', [AuthController::class, 'register'])->name('register');
+Route::post('auth/login', [AuthController::class, 'login'])->name('login');
 
-Route::get('/auth', function() {
-    return view('auth');
-})->name('auth');
-
-
-require __DIR__.'/auth.php';

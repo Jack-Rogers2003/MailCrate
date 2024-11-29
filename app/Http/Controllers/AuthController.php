@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Account;
+
 
 class AuthController extends Controller
 {
     public function showAuthForm()
     {
-        return view('auth.auth');
+        return view('auth');
     }
 
     public function login(Request $request)
@@ -30,7 +32,7 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $request->validate([
+        $Validator = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
@@ -42,7 +44,14 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('auth')->with('success', 'Registration successful! Please login.');
+        $user = User::where('email', $request['email'])->first();
+
+        Account::create([
+            'user_id' => $user->id,
+            'name' => $request->name
+        ]);
+
+        return redirect('/dashboard');
     }
 
     public function logout()
