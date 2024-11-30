@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
+            $table->string('film_name');
+            $table->bigInteger('film_rating');
             $table->bigInteger('account_id')->unsigned()->dropUnique();
 
             $table->foreign('account_id')->references('id')->on('accounts')

@@ -10,6 +10,8 @@
     <header class = "Page header sticky top-0 bg-white">
         <h1 class="text-3xl font-bold text-center py-6">Welcome to MailCrate!</h1>
     </header>
+
+    <!-- Login Section -->
     <div class="min-h-screen bg-blue-900 flex justify-center items-center">
         <div class="w-full max-w-4xl bg-white rounded shadow-lg flex">
             <div class="Login-Section w-1/2 p-8 border-r">
