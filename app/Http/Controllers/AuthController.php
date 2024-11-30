@@ -24,7 +24,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect()->intended('dashboard')->with('success', 'Logged in successfully');
+            return redirect()->intended('')->with('success', 'Logged in successfully');
         }
 
         return back()->withErrors(['login' => 'Invalid credentials'])->withInput();
@@ -38,20 +38,20 @@ class AuthController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
-        $user = User::where('email', $request['email'])->first();
 
         Account::create([
             'user_id' => $user->id,
             'name' => $request->name
         ]);
 
-        return redirect('/dashboard');
+        Auth::login($user);
+
+        return redirect('/');
     }
 
     public function logout()
