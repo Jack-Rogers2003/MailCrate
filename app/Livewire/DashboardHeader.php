@@ -34,4 +34,8 @@ class DashboardHeader extends Component
         $id = Auth::id();
         return redirect()->route('profile', ['userID' => $id]);
     }
+
+    public function toDashboard() {
+        return redirect('/');
+    }
 }
