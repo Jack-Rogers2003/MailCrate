@@ -28,4 +28,10 @@ class DashboardHeader extends Component
     public function sentToAuth() {
         return redirect('/auth');
     }
+
+    public function sentToProfile()
+    {
+        $id = Auth::id();
+        return redirect()->route('profile', ['userID' => $id]);
+    }
 }

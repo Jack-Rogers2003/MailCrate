@@ -23,4 +23,11 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    protected $fillable = [
+        'title',
+        'content',
+        'film_name',
+        'account_id',
+    ];
 }

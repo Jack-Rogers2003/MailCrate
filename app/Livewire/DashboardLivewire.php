@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Post;
 
 
 use Livewire\Component;
@@ -9,17 +10,24 @@ use Livewire\Component;
 class DashboardLivewire extends Component
 {   
     public $text = "working";
+    public $isAuthenticated;
 
     public function render()
     {
-        
+        $this->isAuthenticated = Auth::check();
         // Pass the name to the Blade view
         return view('livewire.dashboard', [
             'name' => Auth::check() ? Auth::user()->name : '',
+            'posts' => Post::get()
         ]);
     }
 
-    public function addText($toAdd) {
-        $this->text = $toAdd;
+    public function post($title, $film, $content) {
+        Post::create([
+            'title' => $title,
+            'content' => $content,
+            'film_name' => $film,
+            'account_id' => Auth::user()->id
+        ]);
     }
 }
