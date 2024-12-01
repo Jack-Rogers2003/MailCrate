@@ -8,9 +8,21 @@ use Livewire\Component;
 
 class ProfilePage extends Component
 {
-    public function render()
+
+
+    public $userID;
+
+    public function mount($id)
     {
+        $this->userID = $id;  // Access the ID from the URL
+    }
+
+    public function render()
+    {   
+        
         return view('livewire.profile-page', [
-            'id' => Auth::check() ? Auth::user()->id : '']);
+            'id' => $this->userID]);
     }
 }
+
+

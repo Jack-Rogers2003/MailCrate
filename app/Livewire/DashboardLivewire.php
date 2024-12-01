@@ -30,4 +30,12 @@ class DashboardLivewire extends Component
             'account_id' => Auth::user()->id
         ]);
     }
+
+    public function sentToProfile($id) {
+        return redirect()->route('profile', ['userID' => $id]);
+    }
+
+    public function delete($postID) {
+        Post::find($postID)->delete();
+    }
 }
