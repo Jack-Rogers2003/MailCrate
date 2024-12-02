@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('film_name');
+            $table->string('image_name')->nullable(); // Optional, to store the image's name
+            $table->string('mime_type')->nullable(); // To store the image's mime type (e.g., image/jpeg)
+            $table->binary('image_data')->nullable(); 
             $table->bigInteger('account_id')->unsigned()->dropUnique();
 
             $table->foreign('account_id')->references('id')->on('accounts')
