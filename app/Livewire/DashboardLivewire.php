@@ -16,6 +16,7 @@ class DashboardLivewire extends Component
     public $text = "working";
     public $isAuthenticated;
     public $image;
+    public $posts = [];
     public $showCommentReply = false;
     public $showPostComments = false;
     public $editPost = false;
@@ -26,6 +27,7 @@ class DashboardLivewire extends Component
     {
         $this->isAuthenticated = Auth::check();
         // Pass the name to the Blade view
+        $this->posts = Post::get();
         return view('livewire.dashboard', [
             'name' => Auth::check() ? Auth::user()->name : '',
             'posts' => Post::get()
@@ -64,9 +66,17 @@ class DashboardLivewire extends Component
         Post::find($postID)->delete();
     }
 
-    public function toggle()
+    public function toggleCommentReply($postID)
     {
-        $this->showCommentReply = !$this->showCommentReply;
+        $property = "showReplyInput_{$postID}";
+
+        // If the property already exists, toggle it
+        if (property_exists($this, $property)) {
+            $this->$property = !$this->$property;
+        } else {
+            // Initialize the property for the first time
+            $this->$property = true;
+        }
     }
 
     public function toggleEdit()
@@ -74,9 +84,17 @@ class DashboardLivewire extends Component
         $this->editPost = !$this->editPost;
     }
 
-    public function togglePostComments()
+    public function togglePostComments($postID)
     {
-        $this->showPostComments = !$this->showPostComments;
+        $property = "showCommentInput__{$postID}";
+
+        // If the property already exists, toggle it
+        if (property_exists($this, $property)) {
+            $this->$property = !$this->$property;
+        } else {
+            // Initialize the property for the first time
+            $this->$property = true;
+        }
     }
 
     public function addComment($content, $postID) {
@@ -85,6 +103,7 @@ class DashboardLivewire extends Component
                 'account_id' => Auth::user()->id,
                 'post_id' => $postID
             ]);
-            $this->toggle();
-    }
+            $property = "showReplyInput_{$postID}";
+            $this->$property = false;
+        }
 }
