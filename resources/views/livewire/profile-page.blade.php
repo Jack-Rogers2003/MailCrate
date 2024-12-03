@@ -5,7 +5,7 @@
     <button wire:click="commentsButton"
     style="padding: 20px 50px; background-color: #007bff; color: white; border: none; border-radius: 5px;">Comments</button>
     </div>
-    <div wire:poll.1s class="py-12">
+    <div class="py-12">
         @if($showPosts)
         @foreach($posts as $post)
                 <div class="p-6 text-gray-900 dark:text-gray-100">

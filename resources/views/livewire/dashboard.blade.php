@@ -7,7 +7,17 @@
                 <label for="image">Select an Image (JPG only):</label>
                 <input type="file" id="imageEntry" wire:model="image" accept="image/*">
                 <textarea class="border p-2 w-full" id = "content" rows="4" placeholder="Enter Review"></textarea>
-                    <input type="text" wire:model="inputText" id="title" class="border p-2 w-full mt-2" placeholder="Enter Post Title"></input>
+                <div style="margin-bottom: 20px;" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <h1>Select Tags:</h1>
+                        @foreach($tagButtons as $newButton)
+                            <button wire:click="tagSelected('{{$newButton}}')" style="padding: 10px 20px; background-color: blue; color: white; border: none; border-radius: 5px;">
+                                {{$newButton}}
+                            </button>
+                        @endforeach
+                        <div>
+                            <p>@json($selectedTags)</p>
+</div>
+                <input type="text" wire:model="inputText" id="title" class="border p-2 w-full mt-2" placeholder="Enter Post Title"></input>
                     <input type="text" wire:model="inputText" id="film" class="border p-2 w-full mt-2" placeholder="Enter Film"></input>
                     <button  style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" 
                     wire:click="post(document.getElementById('title').value, 
@@ -19,7 +29,7 @@
             </div>
 
             @foreach($posts as $post)
-            <div wire:poll.1s class="p-6 text-gray-900 dark:text-gray-100">
+            <div class="p-6 text-gray-900 dark:text-gray-100">
                 <div style="margin-bottom: 20px;" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div style="display: flex; justify-content: space-between; width: 100%; margin: 0">    
                 <button wire:click="sentToProfile({{$post -> account_id}})">{{App\Models\User::find($post -> account_id) -> name}}#{{$post -> account_id}}</button>
@@ -31,6 +41,11 @@
                     <h1 style = "font-size: 50px; font-weight: bold">{{$post -> title}}</h1>   
                     <p1 style = "font-size: 50px; font-weight: bold">Film: {{$post -> film_name}}</p1>     
                     <textarea readonly class="border p-2 w-full" id = "content" rows="4">{{$post -> content}}</textarea>
+                    <div>
+                    @foreach(\App\Models\Post::find($post->id)->tags as $tag)
+                    <text>{{$tag->type}},</text> 
+                    @endforeach
+                    </div>
                     @if($this->{"showReplyInput_{$post->id}"} ?? false)
                         <div>
                             <input id = "commentContent" type="text" placeholder="comment"/>
