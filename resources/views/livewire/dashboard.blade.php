@@ -19,12 +19,12 @@
             </div>
 
             @foreach($posts as $post)
-            <div class="p-6 text-gray-900 dark:text-gray-100">
+            <div wire:poll.1s class="p-6 text-gray-900 dark:text-gray-100">
                 <div style="margin-bottom: 20px;" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div style="display: flex; justify-content: space-between; width: 100%; margin: 0">    
                 <button wire:click="sentToProfile({{$post -> account_id}})">{{App\Models\User::find($post -> account_id) -> name}}#{{$post -> account_id}}</button>
                     @if($isAuthenticated && $post -> account_id && $post -> account_id == App\Models\Account::where('user_id', Auth::id())->first()->id)
-                    <button wire:click="delete({{$post->id}})" style="text-align: right;">Edit</button>
+                    <button wire:click="edit({{$post->id}})" style="text-align: right;">Edit</button>
                     <button wire:click="delete({{$post->id}})" style="text-align: right;">Delete</button>
                     @endif
                 </div>

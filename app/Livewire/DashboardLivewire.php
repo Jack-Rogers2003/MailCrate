@@ -66,6 +66,10 @@ class DashboardLivewire extends Component
         Post::find($postID)->delete();
     }
 
+    public function edit($id) {
+        return redirect()->route('edit_post', ['postID' => $id]);
+    }
+
     public function toggleCommentReply($postID)
     {
         $property = "showReplyInput_{$postID}";
