@@ -15,8 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('content');
             $table->bigInteger('account_id')->unsigned()->dropUnique();
-            $table->bigInteger('post_id')->unsigned()->dropUnique();
-
+            $table->bigInteger('post_id')->nullable()->unsigned()->dropUnique();
+            $table->foreignId('parent_comment_id')->nullable()->dropUnique();
+            
+            $table->foreign('parent_comment_id')->references('id')->on('comments')
+            ->onDelete('cascade')->onUpdate('cascade');
+            
             $table->foreign('post_id')->references('id')->on('posts')
             ->onDelete('cascade')->onUpdate('cascade');
 
