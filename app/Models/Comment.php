@@ -23,13 +23,13 @@ class Comment extends Model
 
     public function parentComment()
     {
-        return $this->belongsTo(Comment::class);
+        return $this->belongsTo(Comment::class, 'parent_comment_id');
     }
 
     // A comment can have many child comments
     public function childComments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class, 'parent_comment_id');
     }
 
     protected $fillable = [
