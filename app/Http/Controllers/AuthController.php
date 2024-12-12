@@ -46,7 +46,7 @@ class AuthController extends Controller
 
         Account::create([
             'user_id' => $user->id,
-            'name' => $request->name
+            'name' => $request->name,
         ]);
 
         Auth::login($user);

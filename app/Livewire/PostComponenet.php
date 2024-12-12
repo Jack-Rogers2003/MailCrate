@@ -7,7 +7,6 @@ use App\Models\Post;
 use App\Models\Comment;
 use App\Models\Tag;
 use Livewire\WithFileUploads;
-
 use Livewire\Component;
 
 class PostComponenet extends Component
@@ -24,19 +23,22 @@ class PostComponenet extends Component
     public $selectedTags = [];
     public $tagButtons;
 
-    protected $listeners = ['postCreated' => 'render'];
+
+    public function mount() 
+    {
+        $this->posts = Post::get();
+    }
 
     public function render()
     {
         $this->isAuthenticated = Auth::check();
         $this->tagButtons = Tag::all('type')->pluck('type')->toArray();
-        $this->posts = Post::get();
         // Pass the name to the Blade view
         return view('livewire.post-componenet');
     }
 
     public function loadPosts() {
-        $this->posts = Post::latest()->get();
+        $this->posts = Post::all();
     }
 
     public function tagSelected($button) {
@@ -74,6 +76,7 @@ class PostComponenet extends Component
             $tagToAdd = Tag::where('type', $tag)->get();
             $post->tags()->attach($tagToAdd);
         }
+        $this->posts = Post::all();
     }
 
     public function sentToProfile($id) {
@@ -86,6 +89,7 @@ class PostComponenet extends Component
 
     public function delete($postID) {
         Post::find($postID)->delete();
+        $this->posts = Post::all();
     }
 
     public function edit($id) {

@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Livewire;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
+
 
 
 
@@ -23,6 +24,10 @@ class ProfilePage extends Component
 
     public function switchPostsComments() {
         $this->showPosts = !$this->showPosts;
+    }
+
+    public function viewPost($postID) {
+        return redirect()->route('post_view_full', ['postID' => $postID]);
     }
 
     public function render()

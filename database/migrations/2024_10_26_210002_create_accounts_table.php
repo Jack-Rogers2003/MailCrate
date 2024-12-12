@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('account_type')->default('user');
             $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users')
             ->onDelete('cascade')->onUpdate('cascade');
         });
