@@ -143,7 +143,6 @@ class DashboardLivewire extends Component
 
 
     public function addComment($content, $postID) {
-        $validatedData = $this->validate();
 
         Comment::create([
             'content' => $content,

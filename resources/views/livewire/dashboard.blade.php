@@ -36,7 +36,7 @@
                 <div style="display: flex; justify-content: space-between; width: 100%; margin: 0">    
                 <button wire:click.stop="sentToProfile({{$post -> account_id}})">{{App\Models\User::find($post -> account_id) -> name}}#{{$post -> account_id}}</button>
                     @if($isAuthenticated && $post -> account_id == App\Models\Account::where('user_id', Auth::id())->first()->id)
-                    <button wire:click.stop="editComment({{$post->id}})" style="text-align: right;">Edit</button>
+                    <button wire:click.stop="edit({{$post->id}})" style="text-align: right;">Edit</button>
                     @endif
 
                     @if($isAuthenticated && $post -> account_id == App\Models\Account::where('user_id', Auth::id())->first()->id 

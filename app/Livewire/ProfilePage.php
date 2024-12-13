@@ -16,10 +16,12 @@ class ProfilePage extends Component
 
     public $userID;
     public $showPosts = true;
+    public $comments;
 
     public function mount($id)
     {
         $this->userID = $id; 
+        $this->comments = Comment::where('account_id', $this->userID)->get();
     }
 
     public function switchPostsComments() {
@@ -37,11 +39,15 @@ class ProfilePage extends Component
         return view('livewire.profile-page', [
             'id' => $this->userID,
             'posts' => Post::where('account_id', $this->userID)->get(),
-            'comments' => Comment::where('account_id', $this->userID)->get()]);
+            'comments' => $this->comments]);
     }
 
     public function postsButton() {
         $this->showPosts = true;
+    }
+
+    public function sentToProfile($id) {
+        return redirect()->route('profile', ['userID' => $id]);
     }
 
     public function commentsButton() {

@@ -3,17 +3,16 @@
 namespace App\Livewire;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Account;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 
 use Livewire\Component;
 
 class ViewPost extends Component
 {
-
-    protected $rules = [
-        'content' => 'required',
-    ];
 
     public $postID;
     public $isAuthenticated;
@@ -47,8 +46,6 @@ class ViewPost extends Component
     }
 
     public function addComment($content, $postID) {
-        $this->content = $content;
-        $validatedData = $this->validate();
 
         Comment::create([
             'content' => $content,
@@ -68,9 +65,6 @@ class ViewPost extends Component
     }
 
     public function addCommentToComment($content, $commentID) {
-        $this->content = $content;
-        $validatedData = $this->validate();
-
         Comment::create([
             'content' => $content,
             'account_id' => Auth::user()->id,

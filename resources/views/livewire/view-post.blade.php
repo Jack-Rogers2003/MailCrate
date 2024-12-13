@@ -39,7 +39,7 @@
                         @if($this->{"showReplyToComment{$comment->id}"} ?? false)
                         <div>
                             <input id = "commentToCommentContent" type="text" placeholder="comment"/>
-                                <button wire:click.stop="addCommentToComment(document.getElementById('commentToCommentContent').value,
+                                <button wire:click="addCommentToComment(document.getElementById('commentToCommentContent').value,
                                 {{$comment->id}})" 
                                 style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;">Enter</button>
                         </div>

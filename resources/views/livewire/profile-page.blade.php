@@ -1,10 +1,11 @@
 <div>
-    <div style = "position:fixed">
+<div class="flex justify-end">
+
     <button wire:click="postsButton" 
-    style="padding: 20px 50px; background-color: #007bff; color: white; border: none; border-radius: 5px;">Posts</button>
+    style="padding: 20px 50px; background-color: #007bff; color: white; border: none; border-radius: 5px; text-align: right;">Posts</button>
     <button wire:click="commentsButton"
-    style="padding: 20px 50px; background-color: #007bff; color: white; border: none; border-radius: 5px;">Comments</button>
-    </div>
+    style="padding: 20px 50px; background-color: #007bff; color: white; border: none; border-radius: 5px; text-align: right;">Comments</button>
+</div>
     <div class="py-12">
         @if($showPosts)
         @foreach($posts as $post)
@@ -53,10 +54,11 @@
                 @endif
                 @endforeach
                 @else
-                @foreach($comments as $comment)
-                <div>
-                <button wire:click.stop="sentToProfile({{$comment -> account_id}})"> {{App\Models\User::find($comment -> account_id) -> name}}#{{$comment->account_id}}</button>
-                    <p1 style="text-align: left;">{{$comment->content}}</p1>
+                
+                @foreach($comments as $newCommnent)
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <button wire:click.stop="sentToProfile({{$newCommnent -> account_id}})"> {{App\Models\User::find($newCommnent -> account_id) -> name}}#{{$newCommnent->account_id}}</button>
+                <p1 style="text-align: left;">{{$newCommnent->content}}</p1>
                 </div>
                 @endforeach
                 @endif
