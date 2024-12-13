@@ -10,9 +10,14 @@ use Livewire\Component;
 
 class ViewPost extends Component
 {
+
+    protected $rules = [
+        'content' => 'required',
+    ];
+
     public $postID;
     public $isAuthenticated;
-
+    public $content;
     public function mount($id) {
         $this->postID = $id;
     }
@@ -42,6 +47,9 @@ class ViewPost extends Component
     }
 
     public function addComment($content, $postID) {
+        $this->content = $content;
+        $validatedData = $this->validate();
+
         Comment::create([
             'content' => $content,
             'account_id' => Auth::user()->id,
@@ -52,6 +60,9 @@ class ViewPost extends Component
     }
 
     public function addCommentToComment($content, $commentID) {
+        $this->content = $content;
+        $validatedData = $this->validate();
+
         Comment::create([
             'content' => $content,
             'account_id' => Auth::user()->id,

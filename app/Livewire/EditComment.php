@@ -9,6 +9,10 @@ class EditComment extends Component
 {
     public $commentID;
 
+    protected $rules = [
+        'content' => 'required',
+    ];
+
     public function mount($id)
     {
         $this->commentID = $id;
@@ -21,6 +25,7 @@ class EditComment extends Component
     }
 
     public function applyEdit($content) {
+        $validatedData = $this->validate();
         Comment::where('id', $this->commentID)->update([
             'content' => $content,
         ]);

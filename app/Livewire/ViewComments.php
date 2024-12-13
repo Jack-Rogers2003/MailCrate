@@ -6,6 +6,7 @@ use Livewire\Component;
 
 class ViewComments extends Component
 {
+
     public $postID;
     public $comments;
 

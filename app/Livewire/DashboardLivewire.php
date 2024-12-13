@@ -39,6 +39,12 @@ class DashboardLivewire extends Component
     public $tagButtons;
     public $perPage = 10;
 
+    protected $rules = [
+        'title' => 'required',
+        'content' => 'required',
+        'film' => 'required',
+    ];
+
     public function mount() 
     {
         $this->posts = Post::get();
@@ -70,6 +76,8 @@ class DashboardLivewire extends Component
     }
 
     public function post() {
+
+        $validatedData = $this->validate();
 
         $post = Post::create([
             'title' => $this->title,
@@ -135,6 +143,8 @@ class DashboardLivewire extends Component
 
 
     public function addComment($content, $postID) {
+        $validatedData = $this->validate();
+
         Comment::create([
             'content' => $content,
             'account_id' => Auth::user()->id,

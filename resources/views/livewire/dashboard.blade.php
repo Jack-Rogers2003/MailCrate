@@ -1,5 +1,7 @@
 
 <div class="py-12">
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8" style="display: flex; flex-direction: column; gap: 20px;">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             @if ($isAuthenticated)
@@ -21,8 +23,8 @@
                         <div>
                             <p>@json($selectedTags)</p>
                                 </div>
-                <input type="text" wire:model="title" id="title" class="border p-2 w-full mt-2" placeholder="Enter Post Title"></input>
-                <input type="text" wire:model="film" id="film" class="border p-2 w-full mt-2" placeholder="Enter Film"></input>
+                <input type="string"  wire:model="title" id="title" class="border p-2 w-full mt-2" placeholder="Enter Post Title"></input>
+                <input type="string" wire:model="film" id="film" class="border p-2 w-full mt-2" placeholder="Enter Film"></input>
                 <button type = "submit"  style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;" 
                     class="bg-blue-500 text-white px-4 py-2 mt-2">Post</button>
                 </form>
