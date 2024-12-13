@@ -4,8 +4,12 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             @if ($isAuthenticated)
                 <div class="p-6 text-gray-900 dark:text-gray-100" wire:ignore.self>
-                <form wire:submit.prevent="post">
-                <input type="file" wire:model="image" id = "image">
+                <form wire:submit="post">
+                <input type="file" wire:model="image" id="image">
+                @if ($image)
+                Photo Preview:
+                 <img src="{{ $image->temporaryUrl() }}">
+                @endif
                 <textarea wire:model="content" class="border p-2 w-full" id = "content" rows="4" placeholder="Enter Review"></textarea>
                 <div style="margin-bottom: 20px;" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <h1>Select Tags:</h1>
@@ -32,7 +36,7 @@
                 <div style="display: flex; justify-content: space-between; width: 100%; margin: 0">    
                 <button wire:click.stop="sentToProfile({{$post -> account_id}})">{{App\Models\User::find($post -> account_id) -> name}}#{{$post -> account_id}}</button>
                     @if($isAuthenticated && $post -> account_id == App\Models\Account::where('user_id', Auth::id())->first()->id)
-                    <button wire:click.stop="edit({{$post->id}})" style="text-align: right;">Edit</button>
+                    <button wire:click.stop="editComment({{$post->id}})" style="text-align: right;">Edit</button>
                     @endif
 
                     @if($isAuthenticated && $post -> account_id == App\Models\Account::where('user_id', Auth::id())->first()->id 

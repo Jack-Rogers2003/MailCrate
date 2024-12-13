@@ -10,6 +10,7 @@ use App\Models\Tag;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -27,6 +28,7 @@ class DashboardLivewire extends Component
     public $content;
     public $title;
     public $film;
+
 
     public $posts = [];
     public $showCommentReply = false;
@@ -68,8 +70,6 @@ class DashboardLivewire extends Component
     }
 
     public function post() {
-
-        dd($this->image);
 
         $post = Post::create([
             'title' => $this->title,
