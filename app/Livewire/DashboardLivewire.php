@@ -54,11 +54,18 @@ class DashboardLivewire extends Component
         }
     }
 
+    public function deleteComment($commentID) {
+        Comment::find($commentID)->delete();
+    }
+
+
     public function loadPosts() {
         $this->posts = Post::all();
     }
 
     public function post() {
+
+        dd($this->image);
 
         $post = Post::create([
             'title' => $this->title,
@@ -76,6 +83,10 @@ class DashboardLivewire extends Component
 
     public function sentToProfile($id) {
         return redirect()->route('profile', ['userID' => $id]);
+    }
+
+    public function editComment($commentID) {
+        return redirect()->route('edit_comment', ['commentID' => $commentID]);
     }
 
     public function viewPost($postID) {

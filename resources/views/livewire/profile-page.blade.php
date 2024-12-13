@@ -24,9 +24,6 @@
                     <h1 style = "font-size: 50px; font-weight: bold">{{$post -> title}}</h1>   
                     <p1 style = "font-size: 50px; font-weight: bold">Film: {{$post -> film_name}}</p1>     
                     <textarea readonly class="border p-2 w-full" id = "content" rows="4">{{$post -> content}}</textarea>
-                @endforeach
-        @else
-        @endif
                 @if($post->comments()->count() > 0)
                 @php
                     $loopLimit = min(10, $post->comments()->count());
@@ -54,4 +51,7 @@
                     @endforeach
                     <button wire:click.stop="viewPost({{$post->id}})">View all Replies</button>
                 @endif
+                @endforeach
+                @endif
+
 </div>

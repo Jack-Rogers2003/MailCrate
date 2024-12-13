@@ -29,7 +29,8 @@
                 @endif
                 @if($post->comments()->count() > 0)
                     @foreach($post->comments()->get() as $comment)
-                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8" style="display: flex; gap: 20px;">
+                    
+                        <div  style="display: flex; gap: 20px;">
                             <button wire:click.stop="sentToProfile({{$comment -> account_id}})"> {{App\Models\User::find($comment -> account_id) -> name}}#{{$comment->account_id}}</button>
                             <p1>{{$comment->content}}</p1>
                         <div>
@@ -43,6 +44,10 @@
                     @else
                     <div>
                     <button wire:click.stop="showReplyToComment({{$comment->id}})"><strong>Comment</strong></button>
+                    @if(Auth::check() && $comment -> account_id == App\Models\Account::where('user_id', Auth::id())->first()->id 
+                    || App\Models\Account::where('user_id', Auth::id())->where('account_type', 'Admin')->exists())
+                    <button wire:click.stop="deleteComment({{$comment->id}})">Delete</button>
+                    @endif
                     </div>
                 @endif
                         </div>

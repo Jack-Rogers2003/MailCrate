@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8" style="display: flex; flex-direction: column; gap: 20px;">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             @if ($isAuthenticated)
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="p-6 text-gray-900 dark:text-gray-100" wire:ignore.self>
                 <form wire:submit.prevent="post">
                 <input type="file" wire:model="image" id = "image">
                 <textarea wire:model="content" class="border p-2 w-full" id = "content" rows="4" placeholder="Enter Review"></textarea>
@@ -80,7 +80,14 @@
                                 style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;">Enter</button>
                             </div>
                             @endif
-                        </div>
+                        @if(Auth::check() && $comment -> account_id == App\Models\Account::where('user_id', Auth::id())->first()->id 
+                    || App\Models\Account::where('user_id', Auth::id())->where('account_type', 'Admin')->exists())
+                    <button wire:click.stop="deleteComment({{$comment->id}})">Delete</button>
+                    @endif
+                    @if(Auth::check())
+                    <button wire:click.stop="editComment({{$comment->id}})">Edit</button>
+                    @endif
+                    </div>
                         @php
                             $count++; 
                         @endphp

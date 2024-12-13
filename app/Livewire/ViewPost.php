@@ -59,6 +59,10 @@ class ViewPost extends Component
         ]);
     }
 
+    public function deleteComment($commentID) {
+        Comment::find($commentID)->delete();
+    }
+
     public function showReplyToComment($commentID)
     {
         $property = "showReplyToComment{$commentID}";
