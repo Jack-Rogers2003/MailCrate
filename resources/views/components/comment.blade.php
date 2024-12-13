@@ -9,7 +9,9 @@
                                 style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;">Enter</button>
                         </div>
                     @else
+                    @if(Auth::check())
                     <button wire:click.stop="showReplyToComment({{$comment->id}})"><strong>Comment</strong></button>
+                    @endif
                     @if(Auth::check() && $comment -> account_id == App\Models\Account::where('user_id', Auth::id())->first()->id 
                     || App\Models\Account::where('user_id', Auth::id())->where('account_type', 'Admin')->exists())
                     <button wire:click.stop="deleteComment({{$comment->id}})"><strong>Delete</strong></button>

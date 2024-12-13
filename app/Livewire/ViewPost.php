@@ -24,7 +24,7 @@ class ViewPost extends Component
 
     public function render()
     {
-        
+        $this->isAuthenticated = Auth::check();
         return view('livewire.view-post', [
             'post' => Post::find($this->postID)]);
     }

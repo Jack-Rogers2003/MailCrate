@@ -62,8 +62,10 @@
                                 style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;">Enter</button>
                         </div>
                     @else
+                    @if($isAuthenticated)
                     <button wire:click.stop="toggleCommentReply({{$post->id}})" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;">Comment</button>  
-                @endif
+                    @endif
+                    @endif
                 @if($post->comments()->count() > 0)
                 @php
                     $loopLimit = min(10, $post->comments()->count());

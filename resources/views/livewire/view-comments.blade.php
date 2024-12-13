@@ -14,7 +14,10 @@
                 style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px;">Enter</button>
             </div>
             @else
+            @if
+            (Auth::check())
             <button wire:click.stop="showReplyToComment({{$comment->id}})">reply<button>
+            @endif
             @endif
         </div>
     @endforeach  
