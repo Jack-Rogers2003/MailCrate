@@ -4,9 +4,12 @@ namespace App\Livewire;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\Account;
+use App\Models\User;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Mail;
 
 
 
@@ -18,6 +21,7 @@ class DashboardLivewire extends Component
 
     public $text = "working";
     public $isAuthenticated;
+    public $email;
 
     public $image;
     public $content;
@@ -138,6 +142,12 @@ class DashboardLivewire extends Component
         ]);
         $property = "showReplyInput_{$postID}";
         $this->$property = false;
+        $post = Post::find($postID);
+        $account = Account::find($post->account_id);
+        $this->email = User::find($account->user_id)->email;
+        Mail::raw("Someone commented on your post!", function ($message) {
+            $message->to($this->email)->subject('Post commented on');
+        });
     }
 
 }
