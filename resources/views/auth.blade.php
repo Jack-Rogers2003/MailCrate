@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Auth Page</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
+<x-app-layout>
+        </head>
 <body class="Authentification View">
     <header class = "Page header sticky top-0 bg-white">
         <h1 class="text-3xl font-bold text-center py-6">Welcome to MailCrate!</h1>
@@ -56,4 +55,6 @@
         </div>
     </div>
 </body>
+</x-app-layout>
+
 </html>

@@ -55,6 +55,14 @@ class ViewPost extends Component
             'account_id' => Auth::user()->id,
             'post_id' => $postID
         ]);
+
+        $post = Post::find($postID);
+        $account = Account::find($post->account_id);
+        $this->email = User::find($account->user_id)->email;
+        Mail::raw("Someone commented on your post!", function ($message) {
+            $message->to($this->email)->subject('Post commented on');
+        });
+
         $property = "showReplyInput_{$postID}";
         $this->$property = false;
     }
@@ -68,6 +76,14 @@ class ViewPost extends Component
             'account_id' => Auth::user()->id,
             'parent_comment_id' => $commentID
         ]);
+
+        $comment = Comment::find($commentID);
+        $account = Account::find($comment->account_id);
+        $this->email = User::find($account->user_id)->email;
+        Mail::raw("Someone commented on your post!", function ($message) {
+            $message->to($this->email)->subject('Post commented on');
+        });
+
     }
 
     public function deleteComment($commentID) {
