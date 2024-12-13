@@ -84,7 +84,7 @@
                     || App\Models\Account::where('user_id', Auth::id())->where('account_type', 'Admin')->exists())
                     <button wire:click.stop="deleteComment({{$comment->id}})">Delete</button>
                     @endif
-                    @if(Auth::check())
+                    @if(Auth::check() && $comment -> account_id == App\Models\Account::where('user_id', Auth::id())->first()->id)
                     <button wire:click.stop="editComment({{$comment->id}})">Edit</button>
                     @endif
                     </div>

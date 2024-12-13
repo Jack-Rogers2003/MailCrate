@@ -63,6 +63,10 @@ class ViewPost extends Component
         Comment::find($commentID)->delete();
     }
 
+    public function editComment($commentID) {
+        return redirect()->route('edit_comment', ['commentID' => $commentID]);
+    }
+
     public function showReplyToComment($commentID)
     {
         $property = "showReplyToComment{$commentID}";

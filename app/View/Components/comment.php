@@ -23,4 +23,8 @@ class Comment extends Component
     public function sentToProfile($id) {
         return redirect()->route('profile', ['userID' => $id]);
     }
+
+    public function editComment($commentID) {
+        return redirect()->route('edit_comment', ['commentID' => $commentID]);
+    }
 }

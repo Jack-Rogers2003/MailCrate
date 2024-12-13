@@ -52,6 +52,13 @@
                     <button wire:click.stop="viewPost({{$post->id}})">View all Replies</button>
                 @endif
                 @endforeach
+                @else
+                @foreach($comments as $comment)
+                <div>
+                <button wire:click.stop="sentToProfile({{$comment -> account_id}})"> {{App\Models\User::find($comment -> account_id) -> name}}#{{$comment->account_id}}</button>
+                    <p1 style="text-align: left;">{{$comment->content}}</p1>
+                </div>
+                @endforeach
                 @endif
 
 </div>
